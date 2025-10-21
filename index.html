@@ -1,0 +1,3987 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction à l'Algorithmique - Présentation Complète</title>
+    <style>
+        :root {/* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Common style patterns */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for opacity control */
+  --color-success-rgb: 33, 128, 141;
+  --color-error-rgb: 192, 21, 47;
+  --color-warning-rgb: 168, 75, 47;
+  --color-info-rgb: 98, 108, 113;
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+}
+
+/* Dark mode colors */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* RGB versions for opacity control (Dark Mode) */
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    /* Background color tokens (Dark Mode) */
+    --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+    --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+    --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+    --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+    --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+    --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+    --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+    --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+
+    /* Semantic Color Tokens (Dark Mode) */
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+    --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    --button-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+    /* Common style patterns - updated for dark mode */
+    --focus-ring: 0 0 0 3px var(--color-focus-ring);
+    --focus-outline: 2px solid var(--color-primary);
+    --status-bg-opacity: 0.15;
+    --status-border-opacity: 0.25;
+    --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+    /* RGB versions for dark mode */
+    --color-success-rgb: var(--color-teal-300-rgb);
+    --color-error-rgb: var(--color-red-400-rgb);
+    --color-warning-rgb: var(--color-orange-400-rgb);
+    --color-info-rgb: var(--color-gray-300-rgb);
+  }
+}
+
+/* Data attribute for manual theme switching */
+[data-color-scheme="dark"] {
+  /* RGB versions for opacity control (dark mode) */
+  --color-gray-400-rgb: 119, 124, 124;
+  --color-teal-300-rgb: 50, 184, 198;
+  --color-gray-300-rgb: 167, 169, 169;
+  --color-gray-200-rgb: 245, 245, 245;
+
+  /* Colorful background palette - Dark Mode */
+  --color-bg-1: rgba(29, 78, 216, 0.15); /* Dark blue */
+  --color-bg-2: rgba(180, 83, 9, 0.15); /* Dark yellow */
+  --color-bg-3: rgba(21, 128, 61, 0.15); /* Dark green */
+  --color-bg-4: rgba(185, 28, 28, 0.15); /* Dark red */
+  --color-bg-5: rgba(107, 33, 168, 0.15); /* Dark purple */
+  --color-bg-6: rgba(194, 65, 12, 0.15); /* Dark orange */
+  --color-bg-7: rgba(190, 24, 93, 0.15); /* Dark pink */
+  --color-bg-8: rgba(8, 145, 178, 0.15); /* Dark cyan */
+
+  /* Semantic Color Tokens (Dark Mode) */
+  --color-background: var(--color-charcoal-700);
+  --color-surface: var(--color-charcoal-800);
+  --color-text: var(--color-gray-200);
+  --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+  --color-primary: var(--color-teal-300);
+  --color-primary-hover: var(--color-teal-400);
+  --color-primary-active: var(--color-teal-800);
+  --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+  --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+  --color-error: var(--color-red-400);
+  --color-success: var(--color-teal-300);
+  --color-warning: var(--color-orange-400);
+  --color-info: var(--color-gray-300);
+  --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+  --color-btn-primary-text: var(--color-slate-900);
+  --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
+  --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+  --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+  /* Common style patterns - updated for dark mode */
+  --focus-ring: 0 0 0 3px var(--color-focus-ring);
+  --focus-outline: 2px solid var(--color-primary);
+  --status-bg-opacity: 0.15;
+  --status-border-opacity: 0.25;
+  --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+  /* RGB versions for dark mode */
+  --color-success-rgb: var(--color-teal-300-rgb);
+  --color-error-rgb: var(--color-red-400-rgb);
+  --color-warning-rgb: var(--color-orange-400-rgb);
+  --color-info-rgb: var(--color-gray-300-rgb);
+}
+
+[data-color-scheme="light"] {
+  /* RGB versions for opacity control (light mode) */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+  /* RGB versions for light mode */
+  --color-success-rgb: var(--color-teal-500-rgb);
+  --color-error-rgb: var(--color-red-500-rgb);
+  --color-warning-rgb: var(--color-orange-500-rgb);
+  --color-info-rgb: var(--color-slate-500-rgb);
+}
+
+/* Base styles */
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+h1 {
+  font-size: var(--font-size-4xl);
+}
+h2 {
+  font-size: var(--font-size-3xl);
+}
+h3 {
+  font-size: var(--font-size-2xl);
+}
+h4 {
+  font-size: var(--font-size-xl);
+}
+h5 {
+  font-size: var(--font-size-lg);
+}
+h6 {
+  font-size: var(--font-size-md);
+}
+
+p {
+  margin: 0 0 var(--space-16) 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+code,
+pre {
+  font-family: var(--font-family-mono);
+  font-size: calc(var(--font-size-base) * 0.95);
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-sm);
+}
+
+code {
+  padding: var(--space-1) var(--space-4);
+}
+
+pre {
+  padding: var(--space-16);
+  margin: var(--space-16) 0;
+  overflow: auto;
+  border: 1px solid var(--color-border);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--radius-base);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: none;
+  text-decoration: none;
+  position: relative;
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-hover);
+}
+
+.btn--primary:active {
+  background: var(--color-primary-active);
+}
+
+.btn--secondary {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.btn--secondary:hover {
+  background: var(--color-secondary-hover);
+}
+
+.btn--secondary:active {
+  background: var(--color-secondary-active);
+}
+
+.btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--outline:hover {
+  background: var(--color-secondary);
+}
+
+.btn--sm {
+  padding: var(--space-4) var(--space-12);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-sm);
+}
+
+.btn--lg {
+  padding: var(--space-10) var(--space-20);
+  font-size: var(--font-size-lg);
+  border-radius: var(--radius-md);
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form elements */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: var(--space-8) var(--space-12);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-base);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+textarea.form-control {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+}
+
+select.form-control {
+  padding: var(--space-8) var(--space-12);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: var(--select-caret-light);
+  background-repeat: no-repeat;
+  background-position: right var(--space-12) center;
+  background-size: 16px;
+  padding-right: var(--space-32);
+}
+
+/* Add a dark mode specific caret */
+@media (prefers-color-scheme: dark) {
+  select.form-control {
+    background-image: var(--select-caret-dark);
+  }
+}
+
+/* Also handle data-color-scheme */
+[data-color-scheme="dark"] select.form-control {
+  background-image: var(--select-caret-dark);
+}
+
+[data-color-scheme="light"] select.form-control {
+  background-image: var(--select-caret-light);
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: var(--focus-outline);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.form-group {
+  margin-bottom: var(--space-16);
+}
+
+/* Card component */
+.card {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card__body {
+  padding: var(--space-16);
+}
+
+.card__header,
+.card__footer {
+  padding: var(--space-16);
+  border-bottom: 1px solid var(--color-card-border-inner);
+}
+
+/* Status indicators - simplified with CSS variables */
+.status {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-6) var(--space-12);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+}
+
+.status--success {
+  background-color: rgba(
+    var(--color-success-rgb, 33, 128, 141),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-success);
+  border: 1px solid
+    rgba(var(--color-success-rgb, 33, 128, 141), var(--status-border-opacity));
+}
+
+.status--error {
+  background-color: rgba(
+    var(--color-error-rgb, 192, 21, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-error);
+  border: 1px solid
+    rgba(var(--color-error-rgb, 192, 21, 47), var(--status-border-opacity));
+}
+
+.status--warning {
+  background-color: rgba(
+    var(--color-warning-rgb, 168, 75, 47),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-warning);
+  border: 1px solid
+    rgba(var(--color-warning-rgb, 168, 75, 47), var(--status-border-opacity));
+}
+
+.status--info {
+  background-color: rgba(
+    var(--color-info-rgb, 98, 108, 113),
+    var(--status-bg-opacity)
+  );
+  color: var(--color-info);
+  border: 1px solid
+    rgba(var(--color-info-rgb, 98, 108, 113), var(--status-border-opacity));
+}
+
+/* Container layout */
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--space-16);
+  padding-left: var(--space-16);
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: var(--container-sm);
+  }
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-md);
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: var(--container-lg);
+  }
+}
+@media (min-width: 1280px) {
+  .container {
+    max-width: var(--container-xl);
+  }
+}
+
+/* Utility classes */
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+.gap-8 {
+  gap: var(--space-8);
+}
+.gap-16 {
+  gap: var(--space-16);
+}
+
+.m-0 {
+  margin: 0;
+}
+.mt-8 {
+  margin-top: var(--space-8);
+}
+.mb-8 {
+  margin-bottom: var(--space-8);
+}
+.mx-8 {
+  margin-left: var(--space-8);
+  margin-right: var(--space-8);
+}
+.my-8 {
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.p-0 {
+  padding: 0;
+}
+.py-8 {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+}
+.px-8 {
+  padding-left: var(--space-8);
+  padding-right: var(--space-8);
+}
+.py-16 {
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-16);
+}
+.px-16 {
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
+}
+
+.block {
+  display: block;
+}
+.hidden {
+  display: none;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+:focus-visible {
+  outline: var(--focus-outline);
+  outline-offset: 2px;
+}
+
+/* Dark mode specifics */
+[data-color-scheme="dark"] .btn--outline {
+  border: 1px solid var(--color-border-secondary);
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+    format('woff2');
+}
+
+/* END PERPLEXITY DESIGN SYSTEM */
+:root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08); /* Light blue */
+  --color-bg-2: rgba(245, 158, 11, 0.08); /* Light yellow */
+  --color-bg-3: rgba(34, 197, 94, 0.08); /* Light green */
+  --color-bg-4: rgba(239, 68, 68, 0.08); /* Light red */
+  --color-bg-5: rgba(147, 51, 234, 0.08); /* Light purple */
+  --color-bg-6: rgba(249, 115, 22, 0.08); /* Light orange */
+  --color-bg-7: rgba(236, 72, 153, 0.08); /* Light pink */
+  --color-bg-8: rgba(6, 182, 212, 0.08); /* Light cyan */
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-size-5xl: 36px;
+  --font-size-6xl: 48px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --letter-spacing-tight: -0.01em;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.04), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+  --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Presentation specific */
+  --slide-transition: opacity var(--duration-slow) var(--ease-standard);
+}
+
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: var(--line-height-normal);
+  color: var(--color-text);
+  background-color: var(--color-background);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Presentation Container */
+.presentation-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Slide Styles */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: var(--slide-transition);
+  background: linear-gradient(135deg, var(--color-background) 0%, var(--color-surface) 100%);
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.slide-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--space-48) var(--space-32);
+  text-align: center;
+}
+
+/* Typography */
+.slide-title {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-48);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.main-title {
+  font-size: var(--font-size-6xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-24);
+  letter-spacing: var(--letter-spacing-tight);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-48);
+}
+
+.author-info {
+  margin-top: var(--space-64);
+}
+
+.author {
+  font-size: var(--font-size-xl);
+  color: var(--color-text);
+}
+
+.large-text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-32);
+}
+
+/* Title Slide Decoration */
+.title-decoration {
+  width: 200px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-teal-400));
+  margin: var(--space-48) auto 0;
+  border-radius: var(--radius-full);
+}
+
+/* Content Area */
+.content-area {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Welcome Content */
+.key-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.point {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  border-left: 4px solid var(--color-primary);
+}
+
+.point .icon {
+  font-size: var(--font-size-3xl);
+  flex-shrink: 0;
+}
+
+.point p {
+  font-size: var(--font-size-lg);
+  text-align: left;
+  margin: 0;
+}
+
+/* Table of Contents */
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: 2px solid transparent;
+}
+
+.toc-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+}
+
+.toc-number {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: var(--color-btn-primary-text);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+}
+
+.toc-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+/* Definition Box */
+.definition-box {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+  padding: var(--space-32);
+  border-radius: var(--radius-2xl);
+  margin-bottom: var(--space-48);
+  box-shadow: var(--shadow-lg);
+}
+
+.definition-text {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-white);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Example Section */
+.example-section {
+  text-align: left;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.example-section h3 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text);
+  margin-bottom: var(--space-24);
+  text-align: center;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.step {
+  padding: var(--space-16) var(--space-20);
+  background: var(--color-bg-1);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-lg);
+  border-left: 4px solid var(--color-primary);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.step:hover {
+  background: var(--color-bg-3);
+  transform: translateX(8px);
+}
+
+/* Grid Layouts */
+.importance-grid,
+.principles-grid,
+.characteristics-grid,
+.qualities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.importance-item,
+.principle-card,
+.char-card,
+.quality-card {
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: 2px solid transparent;
+}
+
+.importance-item:hover,
+.principle-card:hover,
+.char-card:hover,
+.quality-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+.importance-item .icon,
+.quality-icon {
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--space-16);
+  display: block;
+}
+
+.quality-icon {
+  color: var(--color-primary);
+}
+
+.importance-item h3,
+.principle-card h3,
+.char-card h3,
+.quality-card h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.importance-item p,
+.principle-card p,
+.char-card p,
+.quality-card p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Success Notions */
+.success-notions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  max-width: 800px;
+  margin: var(--space-32) auto 0;
+}
+
+.notion-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-20);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.checkmark {
+  width: 32px;
+  height: 32px;
+  background: var(--color-success);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+  margin-top: var(--space-4);
+}
+
+.notion-content h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.notion-content p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Historical Content */
+.historical-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.historical-figure {
+  margin-bottom: var(--space-32);
+}
+
+.historical-figure h3 {
+  font-size: var(--font-size-3xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.subtitle-text {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  font-style: italic;
+}
+
+.contributions h4 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text);
+  margin-bottom: var(--space-20);
+}
+
+.contribution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-20);
+  margin-bottom: var(--space-32);
+}
+
+.contribution {
+  text-align: center;
+  padding: var(--space-20);
+  background: var(--color-bg-2);
+  border-radius: var(--radius-lg);
+}
+
+.contribution .icon {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-12);
+  display: block;
+}
+
+.contribution p {
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+.contribution strong {
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.context-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-20);
+  background: var(--color-bg-1);
+  border-radius: var(--radius-lg);
+  margin: 0;
+}
+
+/* Final Slide */
+.final-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.questions-section,
+.contact-section {
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.questions-section h3,
+.contact-section h3 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.quote-section {
+  margin-top: var(--space-32);
+}
+
+blockquote {
+  font-size: var(--font-size-lg);
+  font-style: italic;
+  color: var(--color-text);
+  background: var(--color-bg-3);
+  padding: var(--space-24);
+  border-left: 4px solid var(--color-primary);
+  border-radius: var(--radius-lg);
+  margin: 0;
+  position: relative;
+}
+
+blockquote footer {
+  margin-top: var(--space-12);
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  font-style: normal;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Navigation Controls */
+.navigation-controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(var(--color-slate-900-rgb), 0.9);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-32);
+  padding: var(--space-16) var(--space-32);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-btn {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-full);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--duration-normal) var(--ease-standard);
+  box-shadow: var(--shadow-md);
+}
+
+.nav-btn:hover {
+  background: var(--color-primary-hover);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-lg);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.nav-arrow {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.slide-counter {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+  padding: var(--space-8) var(--space-20);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family-mono);
+}
+
+.progress-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--color-primary);
+  transition: width var(--duration-normal) var(--ease-standard);
+  width: 2.78%; /* 1/36 * 100% */
+}
+
+/* Steps Flow (Slide 11) */
+.steps-flow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: var(--space-20);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.flow-step:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+}
+
+.step-number {
+  width: 48px;
+  height: 48px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  flex-shrink: 0;
+}
+
+.step-content {
+  text-align: left;
+}
+
+.step-content h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.step-content p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Representation Methods (Slide 12) */
+.representation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.representation-card {
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: 2px solid transparent;
+}
+
+.representation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+.repr-icon {
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--space-16);
+  display: block;
+}
+
+.representation-card h3 {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.representation-card p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-16);
+}
+
+.example-box {
+  background: var(--color-bg-1);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  text-align: left;
+}
+
+.example-box strong {
+  color: var(--color-primary);
+  display: block;
+  margin-bottom: var(--space-8);
+}
+
+/* Code Blocks */
+.code-block {
+  background: var(--color-bg-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin: var(--space-16) 0;
+}
+
+.code-block.large {
+  font-size: var(--font-size-sm);
+}
+
+.code-block pre {
+  margin: 0;
+  padding: var(--space-20);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-block code {
+  background: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Pseudo-code Content (Slide 13) */
+.pseudocode-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Variables Table (Slide 14) */
+.variables-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.types-table {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-32);
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-weight: var(--font-weight-semibold);
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-row:nth-child(even) {
+  background: var(--color-bg-1);
+}
+
+.col {
+  padding: var(--space-16) var(--space-20);
+  display: flex;
+  align-items: center;
+}
+
+.type-name {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.declaration-syntax {
+  text-align: left;
+}
+
+.declaration-syntax h3 {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+/* Assignment Content (Slide 15) */
+.assignment-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.syntax-explanation {
+  background: var(--color-bg-2);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  margin-bottom: var(--space-32);
+}
+
+.syntax-explanation h3 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.explanation-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+}
+
+.example-card {
+  background: var(--color-surface);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.example-card h4 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+  font-size: var(--font-size-lg);
+}
+
+/* I/O Content (Slide 16) */
+.io-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.io-explanation {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+.io-card {
+  background: var(--color-surface);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.io-card h3 {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.complete-example {
+  text-align: left;
+}
+
+.complete-example h3 {
+  text-align: center;
+  margin-bottom: var(--space-16);
+  color: var(--color-primary);
+}
+
+/* Operators Table (Slide 17) */
+.operators-table {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.operators-table .table-header {
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+.operators-table .table-row {
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+.operator {
+  font-family: var(--font-family-mono);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  text-align: center;
+}
+
+.result-true {
+  color: var(--color-success);
+  font-weight: var(--font-weight-bold);
+}
+
+.result-false {
+  color: var(--color-error);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Logical Operators (Slide 18) */
+.logical-operators {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+.operator-card {
+  background: var(--color-surface);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.operator-card h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.priority-section {
+  background: var(--color-bg-3);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.priority-section h3 {
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.priority-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-bottom: var(--space-16);
+}
+
+.priority-item {
+  padding: var(--space-8);
+  background: var(--color-surface);
+  border-radius: var(--radius-base);
+  font-weight: var(--font-weight-medium);
+}
+
+.note {
+  font-style: italic;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Truth Tables (Slide 19) */
+.truth-tables {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.truth-table {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+.truth-table h3 {
+  background: var(--color-primary);
+  color: var(--color-white);
+  padding: var(--space-16);
+  margin: 0;
+  text-align: center;
+}
+
+.truth-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.truth-table th,
+.truth-table td {
+  padding: var(--space-12) var(--space-16);
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.truth-table th {
+  background: var(--color-bg-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.truth-table tr:nth-child(even) td {
+  background: var(--color-bg-1);
+}
+
+/* Conditional Content (Slides 20-24) */
+.conditional-content,
+.nested-examples,
+.switch-content,
+.complex-conditions {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.nested-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: var(--space-24);
+}
+
+.advantages {
+  background: var(--color-bg-3);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  margin-top: var(--space-24);
+}
+
+.advantages h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.advantages ul {
+  margin: 0;
+  padding-left: var(--space-20);
+}
+
+.advantages li {
+  margin-bottom: var(--space-8);
+  color: var(--color-text);
+}
+
+.condition-example {
+  background: var(--color-surface);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-20);
+}
+
+.condition-example h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-16);
+}
+
+.tips {
+  background: var(--color-bg-2);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+}
+
+.tips h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.tips ul {
+  margin: 0;
+  padding-left: var(--space-20);
+}
+
+/* Loop Content (Slides 25-29) */
+.loop-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.syntax-flow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-32);
+  margin-bottom: var(--space-32);
+  align-items: start;
+}
+
+.flowchart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.flow-item {
+  padding: var(--space-12) var(--space-16);
+  border-radius: var(--radius-base);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.condition-flow {
+  background: var(--color-bg-2);
+  border: 2px solid var(--color-warning);
+}
+
+.process-flow {
+  background: var(--color-bg-1);
+  border: 2px solid var(--color-primary);
+}
+
+.end-flow {
+  background: var(--color-bg-3);
+  border: 2px solid var(--color-success);
+}
+
+.characteristics {
+  background: var(--color-bg-4);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+}
+
+.characteristics h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.characteristics ul {
+  margin: 0;
+  padding-left: var(--space-20);
+}
+
+/* Loop Comparison (Slide 28) */
+.comparison-table {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-32);
+}
+
+.comparison-table .table-header {
+  grid-template-columns: 1.5fr 1.5fr 1fr 2fr;
+}
+
+.comparison-table .table-row {
+  grid-template-columns: 1.5fr 1.5fr 1fr 2fr;
+}
+
+.decision-guide {
+  background: var(--color-bg-1);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+}
+
+.decision-guide h3 {
+  text-align: center;
+  color: var(--color-primary);
+  margin-bottom: var(--space-20);
+}
+
+.decision-tree {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.decision-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-16);
+  background: var(--color-surface);
+  border-radius: var(--radius-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.arrow {
+  color: var(--color-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.choice {
+  color: var(--color-success);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Subprograms Content (Slides 30-31) */
+.subprograms-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.procedure-section,
+.function-section {
+  background: var(--color-surface);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-24);
+}
+
+.parameters-section {
+  background: var(--color-bg-1);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+}
+
+.parameters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-20);
+  margin-top: var(--space-16);
+}
+
+.param-type {
+  background: var(--color-surface);
+  padding: var(--space-16);
+  border-radius: var(--radius-base);
+  text-align: center;
+}
+
+.param-type h4 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.param-type code {
+  display: block;
+  margin-top: var(--space-8);
+  font-size: var(--font-size-sm);
+}
+
+.advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+.advantage-card {
+  background: var(--color-surface);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.advantage-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.advantage-icon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-16);
+  display: block;
+}
+
+.advantage-card h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-12);
+}
+
+.practical-example {
+  background: var(--color-bg-2);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+}
+
+/* Arrays Content (Slide 32) */
+.arrays-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.array-basics,
+.array-operations,
+.array-example {
+  background: var(--color-surface);
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-24);
+}
+
+/* Applications Grid (Slide 33) */
+.applications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+  margin-bottom: var(--space-32);
+}
+
+.app-card {
+  background: var(--color-surface);
+  padding: var(--space-24);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-standard);
+  border: 2px solid transparent;
+}
+
+.app-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-primary);
+}
+
+.app-icon {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-16);
+  display: block;
+}
+
+.app-card h3 {
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+  font-size: var(--font-size-lg);
+}
+
+.app-card p:first-of-type {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin-bottom: var(--space-8);
+}
+
+.app-card p:last-of-type {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.impact-note {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-teal-400));
+  padding: var(--space-20);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.impact-text {
+  color: var(--color-white);
+  font-size: var(--font-size-lg);
+  margin: 0;
+}
+
+/* Summary Points (Slide 34) */
+.summary-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  max-width: 800px;
+  margin: var(--space-32) auto 0;
+}
+
+.summary-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-20);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+}
+
+.summary-check {
+  width: 32px;
+  height: 32px;
+  background: var(--color-success);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  flex-shrink: 0;
+  margin-top: var(--space-4);
+}
+
+.summary-content h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.summary-content p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Tips List (Slide 35) */
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+  max-width: 900px;
+  margin: var(--space-32) auto 0;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-20);
+  padding: var(--space-20);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: left;
+  transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.tip-item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--shadow-md);
+}
+
+.tip-number {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  flex-shrink: 0;
+  margin-top: var(--space-4);
+}
+
+.tip-content h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-8);
+}
+
+.tip-content p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slide-content {
+    padding: var(--space-24) var(--space-16);
+  }
+  
+  .slide-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .main-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .subtitle {
+    font-size: var(--font-size-xl);
+  }
+  
+  .toc-grid,
+  .importance-grid,
+  .principles-grid,
+  .characteristics-grid,
+  .qualities-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+  
+  .nav-container {
+    padding: var(--space-12) var(--space-16);
+    gap: var(--space-20);
+  }
+  
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .nav-arrow {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-content {
+    padding: var(--space-16) var(--space-12);
+  }
+  
+  .slide-title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--space-24);
+  }
+  
+  .main-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .definition-box {
+    padding: var(--space-20);
+  }
+  
+  .definition-text {
+    font-size: var(--font-size-xl);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active" data-slide="1">
+            <div class="slide-content title-slide">
+                <h1 class="main-title">INTRODUCTION À L'ALGORITHMIQUE</h1>
+                <h2 class="subtitle">Une approche pédagogique complète</h2>
+                <div class="author-info">
+                    <p class="author">Présenté par : <strong>Ilhame Ezzyne</strong></p>
+                </div>
+                <div class="title-decoration"></div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Image Only -->
+<div class="slide" data-slide="2">
+  <div class="slide-content" style="display: flex; justify-content: center; align-items: center;">
+    <img src="welcome-image.jpg" alt="Bienvenue" style="max-width:80%; border-radius:12px; box-shadow:0 0 20px rgba(0,0,0,0.2);">
+  </div>
+</div>
+
+
+        <!-- Slide 3: Table of Contents -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <h1 class="slide-title">Sommaire</h1>
+                <div class="content-area">
+                    <div class="toc-grid">
+                        <div class="toc-item">
+                            <span class="toc-number">1</span>
+                            <span class="toc-title">Introduction &amp; Définitions</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">2</span>
+                            <span class="toc-title">Concepts Fondamentaux</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">3</span>
+                            <span class="toc-title">Méthodologie</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">4</span>
+                            <span class="toc-title">Représentation</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">5</span>
+                            <span class="toc-title">Éléments de Base</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">6</span>
+                            <span class="toc-title">Structures de Contrôle</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">7</span>
+                            <span class="toc-title">Les Boucles</span>
+                        </div>
+                        <div class="toc-item">
+                            <span class="toc-number">8</span>
+                            <span class="toc-title">Applications &amp; Conclusion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Definition of Algorithm -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <h1 class="slide-title">QU'EST-CE QU'UN ALGORITHME ?</h1>
+                <div class="content-area">
+                    <div class="definition-box">
+                        <p class="definition-text">Une suite ordonnée et finie d'instructions précises permettant de résoudre un problème</p>
+                    </div>
+                    <div class="example-section">
+                        <h3>Exemple : Préparer du thé ☕</h3>
+                        <div class="steps">
+                            <div class="step">1. Faire bouillir de l'eau</div>
+                            <div class="step">2. Mettre le sachet de thé dans la tasse</div>
+                            <div class="step">3. Verser l'eau chaude</div>
+                            <div class="step">4. Laisser infuser 3 minutes</div>
+                            <div class="step">5. Retirer le sachet</div>
+                            <div class="step">6. Ajouter du sucre (optionnel)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Historical Origin -->
+        <div class="slide" data-slide="5">
+            <div class="slide-content">
+                <h1 class="slide-title">ORIGINE HISTORIQUE</h1>
+                <div class="content-area">
+                    <div class="historical-content">
+                        <div class="historical-figure">
+                            <h3>Al-Khawarizmi (783-850)</h3>
+                            <p class="subtitle-text">Mathématicien perse du 9ème siècle</p>
+                        </div>
+                        <div class="contributions">
+                            <h4>Ses contributions majeures :</h4>
+                            <div class="contribution-grid">
+                                <div class="contribution">
+                                    <span class="icon">📐</span>
+                                    <p><strong>PGCD</strong><br>Plus Grand Commun Diviseur</p>
+                                </div>
+                                <div class="contribution">
+                                    <span class="icon">🔢</span>
+                                    <p><strong>Algèbre</strong><br>Résolution d'équations</p>
+                                </div>
+                                <div class="contribution">
+                                    <span class="icon">⭐</span>
+                                    <p><strong>Astronomie</strong><br>Calculs astronomiques</p>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="context-text">Le mot "algorithme" vient de la latinisation de son nom : "Algoritmi"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Importance of Algorithms -->
+        <div class="slide" data-slide="6">
+            <div class="slide-content">
+                <h1 class="slide-title">IMPORTANCE DE L'ALGORITHMIQUE</h1>
+                <div class="content-area">
+                    <div class="importance-grid">
+                        <div class="importance-item">
+                            <span class="icon">🧠</span>
+                            <h3>Développement logique</h3>
+                            <p>Structure la pensée et améliore le raisonnement</p>
+                        </div>
+                        <div class="importance-item">
+                            <span class="icon">🔧</span>
+                            <h3>Résolution de problèmes</h3>
+                            <p>Méthode systématique pour analyser et résoudre</p>
+                        </div>
+                        <div class="importance-item">
+                            <span class="icon">💻</span>
+                            <h3>Base de la programmation</h3>
+                            <p>Fondement de tous les langages de programmation</p>
+                        </div>
+                        <div class="importance-item">
+                            <span class="icon">🌍</span>
+                            <h3>Applications universelles</h3>
+                            <p>Présent dans tous les domaines technologiques</p>
+                        </div>
+                        <div class="importance-item">
+                            <span class="icon">⚡</span>
+                            <h3>Optimisation</h3>
+                            <p>Améliore l'efficacité et les performances</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Essential Principles -->
+        <div class="slide" data-slide="7">
+            <div class="slide-content">
+                <h1 class="slide-title">PRINCIPES ESSENTIELS</h1>
+                <div class="content-area">
+                    <div class="principles-grid">
+                        <div class="principle-card">
+                            <h3>Précision</h3>
+                            <p>Chaque instruction doit être claire et sans ambiguïté</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3>Rigueur</h3>
+                            <p>Respect strict des règles et de la logique</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3>Généralité</h3>
+                            <p>Applicable à une classe de problèmes similaires</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3>Efficacité</h3>
+                            <p>Optimisation du temps et des ressources</p>
+                        </div>
+                        <div class="principle-card">
+                            <h3>Correction</h3>
+                            <p>Produit toujours le résultat attendu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Basic Notions for Success -->
+        <div class="slide" data-slide="8">
+            <div class="slide-content">
+                <h1 class="slide-title">NOTIONS DE BASE POUR RÉUSSIR</h1>
+                <div class="content-area">
+                    <div class="success-notions">
+                        <div class="notion-item">
+                            <span class="checkmark">✓</span>
+                            <div class="notion-content">
+                                <h3>Logique mathématique</h3>
+                                <p>Comprendre les opérations et relations logiques</p>
+                            </div>
+                        </div>
+                        <div class="notion-item">
+                            <span class="checkmark">✓</span>
+                            <div class="notion-content">
+                                <h3>Analyse de problèmes</h3>
+                                <p>Décomposer un problème complexe en sous-problèmes</p>
+                            </div>
+                        </div>
+                        <div class="notion-item">
+                            <span class="checkmark">✓</span>
+                            <div class="notion-content">
+                                <h3>Abstraction</h3>
+                                <p>Identifier les éléments essentiels d'un problème</p>
+                            </div>
+                        </div>
+                        <div class="notion-item">
+                            <span class="checkmark">✓</span>
+                            <div class="notion-content">
+                                <h3>Patience et persévérance</h3>
+                                <p>Développement progressif des compétences</p>
+                            </div>
+                        </div>
+                        <div class="notion-item">
+                            <span class="checkmark">✓</span>
+                            <div class="notion-content">
+                                <h3>Pratique régulière</h3>
+                                <p>Exercices et mise en application constante</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: 6 Characteristics -->
+        <div class="slide" data-slide="9">
+            <div class="slide-content">
+                <h1 class="slide-title">CARACTÉRISTIQUES D'UN BON ALGORITHME</h1>
+                <div class="content-area">
+                    <div class="characteristics-grid">
+                        <div class="char-card">
+                            <h3>Exactitude</h3>
+                            <p>Produit le résultat correct</p>
+                        </div>
+                        <div class="char-card">
+                            <h3>Clarté</h3>
+                            <p>Facilement compréhensible</p>
+                        </div>
+                        <div class="char-card">
+                            <h3>Finitude</h3>
+                            <p>Se termine en temps fini</p>
+                        </div>
+                        <div class="char-card">
+                            <h3>Efficacité</h3>
+                            <p>Utilise les ressources optimalement</p>
+                        </div>
+                        <div class="char-card">
+                            <h3>Généralité</h3>
+                            <p>Résout une classe de problèmes</p>
+                        </div>
+                        <div class="char-card">
+                            <h3>Déterminisme</h3>
+                            <p>Comportement prévisible</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: 4 Qualities -->
+        <div class="slide" data-slide="10">
+            <div class="slide-content">
+                <h1 class="slide-title">QUALITÉS D'UN BON ALGORITHME</h1>
+                <div class="content-area">
+                    <div class="qualities-grid">
+                        <div class="quality-card">
+                            <span class="quality-icon">✓</span>
+                            <h3>Correction</h3>
+                            <p>Fournit toujours la bonne réponse pour toutes les entrées valides</p>
+                        </div>
+                        <div class="quality-card">
+                            <span class="quality-icon">⚡</span>
+                            <h3>Efficacité</h3>
+                            <p>Utilise le minimum de temps et d'espace mémoire</p>
+                        </div>
+                        <div class="quality-card">
+                            <span class="quality-icon">📖</span>
+                            <h3>Lisibilité</h3>
+                            <p>Code clair et bien documenté, facile à comprendre</p>
+                        </div>
+                        <div class="quality-card">
+                            <span class="quality-icon">🧩</span>
+                            <h3>Modularité</h3>
+                            <p>Divisé en modules réutilisables et maintenables</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: 7 Steps of Algorithm Design -->
+        <div class="slide" data-slide="11">
+            <div class="slide-content">
+                <h1 class="slide-title">ÉTAPES DE CONCEPTION</h1>
+                <div class="content-area">
+                    <div class="steps-flow">
+                        <div class="flow-step">
+                            <span class="step-number">1</span>
+                            <div class="step-content">
+                                <h3>Analyse du problème</h3>
+                                <p>Comprendre et définir clairement le problème à résoudre</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">2</span>
+                            <div class="step-content">
+                                <h3>Spécification</h3>
+                                <p>Définir les données d'entrée et de sortie</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">3</span>
+                            <div class="step-content">
+                                <h3>Décomposition</h3>
+                                <p>Diviser le problème en sous-problèmes plus simples</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">4</span>
+                            <div class="step-content">
+                                <h3>Conception</h3>
+                                <p>Élaborer la logique et les étapes de résolution</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">5</span>
+                            <div class="step-content">
+                                <h3>Implémentation</h3>
+                                <p>Écrire l'algorithme dans un langage de programmation</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">6</span>
+                            <div class="step-content">
+                                <h3>Test et validation</h3>
+                                <p>Vérifier que l'algorithme fonctionne correctement</p>
+                            </div>
+                        </div>
+                        <div class="flow-step">
+                            <span class="step-number">7</span>
+                            <div class="step-content">
+                                <h3>Optimisation</h3>
+                                <p>Améliorer les performances et l'efficacité</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Representation Methods -->
+        <div class="slide" data-slide="12">
+            <div class="slide-content">
+                <h1 class="slide-title">MODES DE REPRÉSENTATION</h1>
+                <div class="content-area">
+                    <div class="representation-grid">
+                        <div class="representation-card">
+                            <span class="repr-icon">💬</span>
+                            <h3>Langage naturel</h3>
+                            <p>Description en français courant</p>
+                            <div class="example-box">
+                                <strong>Exemple :</strong><br>
+                                "Demander l'âge de l'utilisateur, puis afficher s'il est majeur ou mineur"
+                            </div>
+                        </div>
+                        <div class="representation-card">
+                            <span class="repr-icon">📝</span>
+                            <h3>Pseudo-code</h3>
+                            <p>Notation structurée et standardisée</p>
+                            <div class="example-box">
+                                <strong>Exemple :</strong><br>
+                                <code>LIRE age<br>SI age ≥ 18 ALORS<br>&nbsp;&nbsp;ÉCRIRE "Majeur"<br>SINON<br>&nbsp;&nbsp;ÉCRIRE "Mineur"<br>FINSI</code>
+                            </div>
+                        </div>
+                        <div class="representation-card">
+                            <span class="repr-icon">📊</span>
+                            <h3>Organigramme</h3>
+                            <p>Représentation graphique avec symboles</p>
+                            <div class="example-box">
+                                <strong>Éléments :</strong><br>
+                                ○ Début/Fin<br>
+                                □ Traitement<br>
+                                ◇ Condition
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 13: Pseudo-code -->
+        <div class="slide" data-slide="13">
+            <div class="slide-content">
+                <h1 class="slide-title">LE PSEUDO-CODE</h1>
+                <div class="content-area">
+                    <div class="pseudocode-content">
+                        <div class="syntax-section">
+                            <h3>Syntaxe de base</h3>
+                            <div class="code-block">
+                                <pre><code>ALGORITHME nom_algorithme
+VAR
+    variable1 : type
+    variable2 : type
+DÉBUT
+    instructions...
+FIN</code></pre>
+                            </div>
+                        </div>
+                        <div class="example-section">
+                            <h3>Exemple complet : Calcul de moyenne</h3>
+                            <div class="code-block">
+                                <pre><code>ALGORITHME Moyenne
+VAR
+    note1, note2, moyenne : réel
+DÉBUT
+    ÉCRIRE "Entrez la première note : "
+    LIRE note1
+    ÉCRIRE "Entrez la deuxième note : "
+    LIRE note2
+    moyenne ← (note1 + note2) / 2
+    ÉCRIRE "La moyenne est : ", moyenne
+FIN</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Variables and Data Types -->
+        <div class="slide" data-slide="14">
+            <div class="slide-content">
+                <h1 class="slide-title">VARIABLES ET TYPES DE DONNÉES</h1>
+                <div class="content-area">
+                    <div class="variables-content">
+                        <div class="types-table">
+                            <div class="table-header">
+                                <div class="col">Type</div>
+                                <div class="col">Description</div>
+                                <div class="col">Exemples</div>
+                            </div>
+                            <div class="table-row">
+                                <div class="col type-name">entier</div>
+                                <div class="col">Nombres entiers</div>
+                                <div class="col">42, -17, 0</div>
+                            </div>
+                            <div class="table-row">
+                                <div class="col type-name">réel</div>
+                                <div class="col">Nombres décimaux</div>
+                                <div class="col">3.14, -2.5, 0.0</div>
+                            </div>
+                            <div class="table-row">
+                                <div class="col type-name">chaîne</div>
+                                <div class="col">Texte entre guillemets</div>
+                                <div class="col">"Bonjour", "Alice"</div>
+                            </div>
+                            <div class="table-row">
+                                <div class="col type-name">booléen</div>
+                                <div class="col">Valeur logique</div>
+                                <div class="col">VRAI, FAUX</div>
+                            </div>
+                        </div>
+                        <div class="declaration-syntax">
+                            <h3>Syntaxe de déclaration</h3>
+                            <div class="code-block">
+                                <pre><code>VAR
+    nom_variable : type
+    age : entier
+    prix : réel
+    nom : chaîne
+    valide : booléen</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Assignment -->
+        <div class="slide" data-slide="15">
+            <div class="slide-content">
+                <h1 class="slide-title">L'AFFECTATION</h1>
+                <div class="content-area">
+                    <div class="assignment-content">
+                        <div class="syntax-explanation">
+                            <h3>Syntaxe : variable ← expression</h3>
+                            <p class="explanation-text">La flèche ← indique qu'on assigne une valeur à une variable</p>
+                        </div>
+                        <div class="examples-grid">
+                            <div class="example-card">
+                                <h4>Affectation simple</h4>
+                                <div class="code-block">
+                                    <pre><code>age ← 25
+nom ← "Marie"
+pi ← 3.14159
+actif ← VRAI</code></pre>
+                                </div>
+                            </div>
+                            <div class="example-card">
+                                <h4>Calculs</h4>
+                                <div class="code-block">
+                                    <pre><code>surface ← longueur * largeur
+resultat ← a + b * c
+compteur ← compteur + 1
+moyenne ← somme / nombre</code></pre>
+                                </div>
+                            </div>
+                            <div class="example-card">
+                                <h4>Échange de variables</h4>
+                                <div class="code-block">
+                                    <pre><code>// Échanger a et b
+temp ← a
+a ← b
+b ← temp</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 16: LIRE and ÉCRIRE -->
+        <div class="slide" data-slide="16">
+            <div class="slide-content">
+                <h1 class="slide-title">INSTRUCTIONS LIRE ET ÉCRIRE</h1>
+                <div class="content-area">
+                    <div class="io-content">
+                        <div class="io-explanation">
+                            <div class="io-card">
+                                <h3>📥 LIRE</h3>
+                                <p>Permet de saisir des données depuis l'utilisateur</p>
+                                <div class="code-block">
+                                    <pre><code>LIRE variable
+LIRE nom
+LIRE age, salaire</code></pre>
+                                </div>
+                            </div>
+                            <div class="io-card">
+                                <h3>📤 ÉCRIRE</h3>
+                                <p>Permet d'afficher des informations à l'utilisateur</p>
+                                <div class="code-block">
+                                    <pre><code>ÉCRIRE "message"
+ÉCRIRE variable
+ÉCRIRE "Age: ", age</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="complete-example">
+                            <h3>Exemple complet : Salutation</h3>
+                            <div class="code-block large">
+                                <pre><code>ALGORITHME Salutation
+VAR
+    nom : chaîne
+    age : entier
+DÉBUT
+    ÉCRIRE "Comment vous appelez-vous ? "
+    LIRE nom
+    ÉCRIRE "Quel âge avez-vous ? "
+    LIRE age
+    ÉCRIRE "Bonjour ", nom, " ! Vous avez ", age, " ans."
+FIN</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 17: Comparison Operators -->
+        <div class="slide" data-slide="17">
+            <div class="slide-content">
+                <h1 class="slide-title">OPÉRATEURS DE COMPARAISON</h1>
+                <div class="content-area">
+                    <div class="operators-table">
+                        <div class="table-header">
+                            <div class="col">Opérateur</div>
+                            <div class="col">Signification</div>
+                            <div class="col">Exemple</div>
+                            <div class="col">Résultat</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">=</div>
+                            <div class="col">Égal à</div>
+                            <div class="col">5 = 5</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">≠</div>
+                            <div class="col">Différent de</div>
+                            <div class="col">5 ≠ 3</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">&gt;</div>
+                            <div class="col">Supérieur à</div>
+                            <div class="col">7 &gt; 3</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">&lt;</div>
+                            <div class="col">Inférieur à</div>
+                            <div class="col">2 &lt; 8</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">≥</div>
+                            <div class="col">Supérieur ou égal</div>
+                            <div class="col">5 ≥ 5</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col operator">≤</div>
+                            <div class="col">Inférieur ou égal</div>
+                            <div class="col">3 ≤ 9</div>
+                            <div class="col result-true">VRAI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Logical Operators -->
+        <div class="slide" data-slide="18">
+            <div class="slide-content">
+                <h1 class="slide-title">OPÉRATEURS LOGIQUES</h1>
+                <div class="content-area">
+                    <div class="logical-operators">
+                        <div class="operator-card">
+                            <h3>ET (AND)</h3>
+                            <p>Vrai si les deux conditions sont vraies</p>
+                            <div class="code-block">
+                                <pre><code>(age ≥ 18) ET (permis = VRAI)
+(note ≥ 10) ET (note ≤ 20)</code></pre>
+                            </div>
+                        </div>
+                        <div class="operator-card">
+                            <h3>OU (OR)</h3>
+                            <p>Vrai si au moins une condition est vraie</p>
+                            <div class="code-block">
+                                <pre><code>(jour = "samedi") OU (jour = "dimanche")
+(age &lt; 12) OU (age &gt; 65)</code></pre>
+                            </div>
+                        </div>
+                        <div class="operator-card">
+                            <h3>NON (NOT)</h3>
+                            <p>Inverse la valeur booléenne</p>
+                            <div class="code-block">
+                                <pre><code>NON (age &lt; 18)
+NON connecté</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="priority-section">
+                        <h3>Ordre de priorité</h3>
+                        <div class="priority-list">
+                            <div class="priority-item">1. NON (priorité la plus haute)</div>
+                            <div class="priority-item">2. ET</div>
+                            <div class="priority-item">3. OU (priorité la plus basse)</div>
+                        </div>
+                        <p class="note">💡 Utilisez des parenthèses pour clarifier l'ordre d'évaluation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 19: Truth Tables -->
+        <div class="slide" data-slide="19">
+            <div class="slide-content">
+                <h1 class="slide-title">TABLES DE VÉRITÉ</h1>
+                <div class="content-area">
+                    <div class="truth-tables">
+                        <div class="truth-table">
+                            <h3>Opérateur ET</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>A</th>
+                                        <th>B</th>
+                                        <th>A ET B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>VRAI</td>
+                                        <td>VRAI</td>
+                                        <td class="result-true">VRAI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VRAI</td>
+                                        <td>FAUX</td>
+                                        <td class="result-false">FAUX</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FAUX</td>
+                                        <td>VRAI</td>
+                                        <td class="result-false">FAUX</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FAUX</td>
+                                        <td>FAUX</td>
+                                        <td class="result-false">FAUX</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="truth-table">
+                            <h3>Opérateur OU</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>A</th>
+                                        <th>B</th>
+                                        <th>A OU B</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>VRAI</td>
+                                        <td>VRAI</td>
+                                        <td class="result-true">VRAI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>VRAI</td>
+                                        <td>FAUX</td>
+                                        <td class="result-true">VRAI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FAUX</td>
+                                        <td>VRAI</td>
+                                        <td class="result-true">VRAI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FAUX</td>
+                                        <td>FAUX</td>
+                                        <td class="result-false">FAUX</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="truth-table">
+                            <h3>Opérateur NON</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>A</th>
+                                        <th>NON A</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>VRAI</td>
+                                        <td class="result-false">FAUX</td>
+                                    </tr>
+                                    <tr>
+                                        <td>FAUX</td>
+                                        <td class="result-true">VRAI</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: SI...ALORS...SINON Structure -->
+        <div class="slide" data-slide="20">
+            <div class="slide-content">
+                <h1 class="slide-title">STRUCTURE SI...ALORS...SINON</h1>
+                <div class="content-area">
+                    <div class="conditional-content">
+                        <div class="syntax-section">
+                            <h3>Syntaxe</h3>
+                            <div class="code-block">
+                                <pre><code>SI condition ALORS
+    instructions si vraie
+SINON
+    instructions si fausse
+FINSI</code></pre>
+                            </div>
+                        </div>
+                        <div class="example-section">
+                            <h3>Exemple : Vérification d'âge</h3>
+                            <div class="code-block large">
+                                <pre><code>ALGORITHME VerificationAge
+VAR
+    age : entier
+DÉBUT
+    ÉCRIRE "Entrez votre âge : "
+    LIRE age
+    SI age ≥ 18 ALORS
+        ÉCRIRE "Vous êtes majeur"
+    SINON
+        ÉCRIRE "Vous êtes mineur"
+    FINSI
+FIN</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Simple and Nested SI -->
+        <div class="slide" data-slide="21">
+            <div class="slide-content">
+                <h1 class="slide-title">SI SIMPLE ET IMBRIQUÉ</h1>
+                <div class="content-area">
+                    <div class="nested-examples">
+                        <div class="example-card">
+                            <h3>SI Simple</h3>
+                            <div class="code-block">
+                                <pre><code>SI note ≥ 10 ALORS
+    ÉCRIRE "Réussi"
+FINSI</code></pre>
+                            </div>
+                        </div>
+                        <div class="example-card">
+                            <h3>SI Imbriqué : Classification des notes</h3>
+                            <div class="code-block">
+                                <pre><code>SI note ≥ 16 ALORS
+    ÉCRIRE "Très bien"
+SINON
+    SI note ≥ 14 ALORS
+        ÉCRIRE "Bien"
+    SINON
+        SI note ≥ 12 ALORS
+            ÉCRIRE "Assez bien"
+        SINON
+            SI note ≥ 10 ALORS
+                ÉCRIRE "Passable"
+            SINON
+                ÉCRIRE "Insuffisant"
+            FINSI
+        FINSI
+    FINSI
+FINSI</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 22: SELON...CAS Structure -->
+        <div class="slide" data-slide="22">
+            <div class="slide-content">
+                <h1 class="slide-title">STRUCTURE SELON...CAS</h1>
+                <div class="content-area">
+                    <div class="switch-content">
+                        <div class="syntax-section">
+                            <h3>Syntaxe</h3>
+                            <div class="code-block">
+                                <pre><code>SELON variable FAIRE
+    CAS valeur1 : instructions1
+    CAS valeur2 : instructions2
+    CAS valeur3 : instructions3
+    DEFAUT : instructions par défaut
+FIN SELON</code></pre>
+                            </div>
+                        </div>
+                        <div class="example-section">
+                            <h3>Exemple : Menu calculatrice</h3>
+                            <div class="code-block">
+                                <pre><code>SELON operation FAIRE
+    CAS "+" : resultat ← a + b
+    CAS "-" : resultat ← a - b
+    CAS "*" : resultat ← a * b
+    CAS "/" : 
+        SI b ≠ 0 ALORS
+            resultat ← a / b
+        SINON
+            ÉCRIRE "Erreur : division par zéro"
+        FINSI
+    DEFAUT : ÉCRIRE "Opération inconnue"
+FIN SELON</code></pre>
+                            </div>
+                        </div>
+                        <div class="advantages">
+                            <h3>💡 Avantages</h3>
+                            <ul>
+                                <li>Plus lisible que les SI imbriqués</li>
+                                <li>Meilleure performance</li>
+                                <li>Facilite la maintenance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 23: Complex Conditions -->
+        <div class="slide" data-slide="23">
+            <div class="slide-content">
+                <h1 class="slide-title">CONDITIONS COMPLEXES</h1>
+                <div class="content-area">
+                    <div class="complex-conditions">
+                        <div class="condition-example">
+                            <h3>Exemple 1 : Vérification d'âge et permis</h3>
+                            <div class="code-block">
+                                <pre><code>SI (age ≥ 18) ET (permis = VRAI) ALORS
+    ÉCRIRE "Peut conduire"
+SINON
+    ÉCRIRE "Ne peut pas conduire"
+FINSI</code></pre>
+                            </div>
+                        </div>
+                        <div class="condition-example">
+                            <h3>Exemple 2 : Jour de week-end</h3>
+                            <div class="code-block">
+                                <pre><code>SI (jour = "samedi") OU (jour = "dimanche") ALORS
+    ÉCRIRE "C'est le week-end !"
+SINON
+    ÉCRIRE "Jour de semaine"
+FINSI</code></pre>
+                            </div>
+                        </div>
+                        <div class="condition-example">
+                            <h3>Exemple 3 : Condition avec parenthèses</h3>
+                            <div class="code-block">
+                                <pre><code>SI ((age ≥ 12) ET (age ≤ 17)) OU (statut = "etudiant") ALORS
+    ÉCRIRE "Tarif réduit"
+SINON
+    ÉCRIRE "Tarif normal"
+FINSI</code></pre>
+                            </div>
+                        </div>
+                        <div class="tips">
+                            <h3>📝 Conseils</h3>
+                            <ul>
+                                <li>Utilisez des parenthèses pour clarifier</li>
+                                <li>Décomposez les conditions très complexes</li>
+                                <li>Testez tous les cas possibles</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 24: Complete Example - Discount Calculation -->
+        <div class="slide" data-slide="24">
+            <div class="slide-content">
+                <h1 class="slide-title">EXEMPLE COMPLET : CALCUL DE REMISE</h1>
+                <div class="content-area">
+                    <div class="complete-example">
+                        <div class="code-block large">
+                            <pre><code>ALGORITHME CalculRemise
+VAR
+    montant, remise, montantFinal : réel
+    typeClient : chaîne
+    fidelite : booléen
+DÉBUT
+    ÉCRIRE "Entrez le montant : "
+    LIRE montant
+    ÉCRIRE "Type de client (normal/premium/vip) : "
+    LIRE typeClient
+    ÉCRIRE "Client fidèle ? (VRAI/FAUX) : "
+    LIRE fidelite
+    
+    // Calcul de la remise
+    SI typeClient = "vip" ALORS
+        remise ← 20  // 20% pour les VIP
+    SINON
+        SI typeClient = "premium" ALORS
+            remise ← 15  // 15% pour les premium
+        SINON
+            remise ← 5   // 5% pour les clients normaux
+        FINSI
+    FINSI
+    
+    // Bonus fidélité
+    SI (fidelite = VRAI) ET (montant ≥ 100) ALORS
+        remise ← remise + 5  // +5% pour les fidèles
+    FINSI
+    
+    montantFinal ← montant * (1 - remise/100)
+    ÉCRIRE "Remise : ", remise, "%"
+    ÉCRIRE "Montant final : ", montantFinal, "€"
+FIN</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 25: TANTQUE Loop -->
+        <div class="slide" data-slide="25">
+            <div class="slide-content">
+                <h1 class="slide-title">BOUCLE TANTQUE</h1>
+                <div class="content-area">
+                    <div class="loop-content">
+                        <div class="syntax-flow">
+                            <div class="syntax-section">
+                                <h3>Syntaxe</h3>
+                                <div class="code-block">
+                                    <pre><code>TANTQUE condition FAIRE
+    instructions
+FIN TANTQUE</code></pre>
+                                </div>
+                            </div>
+                            <div class="flowchart">
+                                <div class="flow-item condition-flow">Condition vraie ?</div>
+                                <div class="flow-item process-flow">Exécuter instructions</div>
+                                <div class="flow-item end-flow">Continuer le programme</div>
+                            </div>
+                        </div>
+                        <div class="example-section">
+                            <h3>Exemple : Compter de 1 à 10</h3>
+                            <div class="code-block">
+                                <pre><code>VAR
+    compteur : entier
+DÉBUT
+    compteur ← 1
+    TANTQUE compteur ≤ 10 FAIRE
+        ÉCRIRE compteur
+        compteur ← compteur + 1
+    FIN TANTQUE
+    ÉCRIRE "Terminé !"
+FIN</code></pre>
+                            </div>
+                        </div>
+                        <div class="characteristics">
+                            <h3>🔑 Caractéristiques</h3>
+                            <ul>
+                                <li>Condition testée au début</li>
+                                <li>Peut ne jamais s'exécuter (0 fois)</li>
+                                <li>Attention aux boucles infinies !</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 26: RÉPÉTER...JUSQU'À Loop -->
+        <div class="slide" data-slide="26">
+            <div class="slide-content">
+                <h1 class="slide-title">BOUCLE RÉPÉTER...JUSQU'À</h1>
+                <div class="content-area">
+                    <div class="repeat-content">
+                        <div class="syntax-section">
+                            <h3>Syntaxe</h3>
+                            <div class="code-block">
+                                <pre><code>RÉPÉTER
+    instructions
+JUSQU'À condition</code></pre>
+                            </div>
+                        </div>
+                        <div class="example-section">
+                            <h3>Exemple : Validation de saisie</h3>
+                            <div class="code-block">
+                                <pre><code>VAR
+    note : réel
+DÉBUT
+    RÉPÉTER
+        ÉCRIRE "Entrez une note (0-20) : "
+        LIRE note
+        SI (note < 0) OU (note > 20) ALORS
+            ÉCRIRE "Note invalide !"
+        FINSI
+    JUSQU'À (note ≥ 0) ET (note ≤ 20)
+    ÉCRIRE "Note valide : ", note
+FIN</code></pre>
+                            </div>
+                        </div>
+                        <div class="characteristics">
+                            <h3>🔑 Caractéristiques</h3>
+                            <ul>
+                                <li>Condition testée à la fin</li>
+                                <li>S'exécute toujours au moins 1 fois</li>
+                                <li>Idéale pour la validation de saisies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 27: POUR Loop -->
+        <div class="slide" data-slide="27">
+            <div class="slide-content">
+                <h1 class="slide-title">BOUCLE POUR</h1>
+                <div class="content-area">
+                    <div class="for-content">
+                        <div class="syntax-section">
+                            <h3>Syntaxe</h3>
+                            <div class="code-block">
+                                <pre><code>POUR variable DE valeur_initiale À valeur_finale FAIRE
+    instructions
+FIN POUR
+
+// Avec pas personnalisé
+POUR variable DE début À fin PAS increment FAIRE
+    instructions
+FIN POUR</code></pre>
+                            </div>
+                        </div>
+                        <div class="examples-grid">
+                            <div class="example-card">
+                                <h4>Compter en avant</h4>
+                                <div class="code-block">
+                                    <pre><code>POUR i DE 1 À 10 FAIRE
+    ÉCRIRE i
+FIN POUR</code></pre>
+                                </div>
+                            </div>
+                            <div class="example-card">
+                                <h4>Compter en arrière</h4>
+                                <div class="code-block">
+                                    <pre><code>POUR i DE 10 À 1 PAS -1 FAIRE
+    ÉCRIRE i
+FIN POUR</code></pre>
+                                </div>
+                            </div>
+                            <div class="example-card">
+                                <h4>Pas personnalisé</h4>
+                                <div class="code-block">
+                                    <pre><code>// Nombres pairs
+POUR i DE 2 À 20 PAS 2 FAIRE
+    ÉCRIRE i
+FIN POUR</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="characteristics">
+                            <h3>🔑 Caractéristiques</h3>
+                            <ul>
+                                <li>Nombre d'itérations connu à l'avance</li>
+                                <li>Compteur géré automatiquement</li>
+                                <li>Idéale pour parcourir des tableaux</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 28: Loop Comparison -->
+        <div class="slide" data-slide="28">
+            <div class="slide-content">
+                <h1 class="slide-title">COMPARAISON DES BOUCLES</h1>
+                <div class="content-area">
+                    <div class="comparison-table">
+                        <div class="table-header">
+                            <div class="col">Type de boucle</div>
+                            <div class="col">Condition testée</div>
+                            <div class="col">Exécutions min.</div>
+                            <div class="col">Utilisation idéale</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col"><strong>TANTQUE</strong></div>
+                            <div class="col">Au début</div>
+                            <div class="col">0 fois</div>
+                            <div class="col">Nombre d'itérations inconnu</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col"><strong>RÉPÉTER</strong></div>
+                            <div class="col">À la fin</div>
+                            <div class="col">1 fois</div>
+                            <div class="col">Au moins une exécution nécessaire</div>
+                        </div>
+                        <div class="table-row">
+                            <div class="col"><strong>POUR</strong></div>
+                            <div class="col">Avec compteur</div>
+                            <div class="col">n fois</div>
+                            <div class="col">Nombre d'itérations connu</div>
+                        </div>
+                    </div>
+                    <div class="decision-guide">
+                        <h3>🧐 Guide de décision</h3>
+                        <div class="decision-tree">
+                            <div class="decision-item">
+                                <strong>Nombre d'itérations connu ?</strong>
+                                <span class="arrow">→</span>
+                                <span class="choice">OUI : Utilisez POUR</span>
+                            </div>
+                            <div class="decision-item">
+                                <strong>Au moins une exécution requise ?</strong>
+                                <span class="arrow">→</span>
+                                <span class="choice">OUI : Utilisez RÉPÉTER</span>
+                            </div>
+                            <div class="decision-item">
+                                <strong>Peut ne jamais s'exécuter ?</strong>
+                                <span class="arrow">→</span>
+                                <span class="choice">OUI : Utilisez TANTQUE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 29: Complete Example - Average Calculation -->
+        <div class="slide" data-slide="29">
+            <div class="slide-content">
+                <h1 class="slide-title">EXEMPLE COMPLET : CALCUL DE MOYENNE</h1>
+                <div class="content-area">
+                    <div class="complete-example">
+                        <div class="code-block large">
+                            <pre><code>ALGORITHME CalculMoyenne
+VAR
+    nombreNotes, i : entier
+    note, somme, moyenne : réel
+DÉBUT
+    // Demander le nombre de notes
+    RÉPÉTER
+        ÉCRIRE "Combien de notes ? (1-20) : "
+        LIRE nombreNotes
+    JUSQU'À (nombreNotes ≥ 1) ET (nombreNotes ≤ 20)
+    
+    somme ← 0
+    
+    // Saisir et additionner les notes
+    POUR i DE 1 À nombreNotes FAIRE
+        RÉPÉTER
+            ÉCRIRE "Note ", i, " (0-20) : "
+            LIRE note
+            SI (note < 0) OU (note > 20) ALORS
+                ÉCRIRE "Note invalide !"
+            FINSI
+        JUSQU'À (note ≥ 0) ET (note ≤ 20)
+        
+        somme ← somme + note
+    FIN POUR
+    
+    // Calculer et afficher la moyenne
+    moyenne ← somme / nombreNotes
+    ÉCRIRE "Moyenne : ", moyenne
+    
+    // Appréciation
+    SI moyenne ≥ 16 ALORS
+        ÉCRIRE "Très bien !"
+    SINON
+        SI moyenne ≥ 14 ALORS
+            ÉCRIRE "Bien !"
+        SINON
+            SI moyenne ≥ 10 ALORS
+                ÉCRIRE "Réussi"
+            SINON
+                ÉCRIRE "Échec"
+            FINSI
+        FINSI
+    FINSI
+FIN</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 30: Procedures and Functions -->
+        <div class="slide" data-slide="30">
+            <div class="slide-content">
+                <h1 class="slide-title">PROCÉDURES ET FONCTIONS</h1>
+                <div class="content-area">
+                    <div class="subprograms-content">
+                        <div class="procedure-section">
+                            <h3>🛠️ Procédures</h3>
+                            <p>Sous-algorithme qui exécute des actions</p>
+                            <div class="code-block">
+                                <pre><code>PROCÉDURE AfficherMessage(message : chaîne)
+DÉBUT
+    ÉCRIRE "*** ", message, " ***"
+FIN
+
+// Appel
+AfficherMessage("Bienvenue !")</code></pre>
+                            </div>
+                        </div>
+                        <div class="function-section">
+                            <h3>⚙️ Fonctions</h3>
+                            <p>Sous-algorithme qui retourne une valeur</p>
+                            <div class="code-block">
+                                <pre><code>FONCTION Carre(nombre : réel) : réel
+DÉBUT
+    RETOURNER nombre * nombre
+FIN
+
+// Utilisation
+resultat ← Carre(5)
+ÉCRIRE "5² = ", resultat</code></pre>
+                            </div>
+                        </div>
+                        <div class="parameters-section">
+                            <h3>📝 Paramètres</h3>
+                            <div class="parameters-grid">
+                                <div class="param-type">
+                                    <h4>Par valeur</h4>
+                                    <p>Copie de la variable</p>
+                                    <code>FONCTION Test(x : entier)</code>
+                                </div>
+                                <div class="param-type">
+                                    <h4>Par référence</h4>
+                                    <p>Accès direct à la variable</p>
+                                    <code>PROCÉDURE Echanger(VAR a, b : entier)</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 31: Advantages of Sub-algorithms -->
+        <div class="slide" data-slide="31">
+            <div class="slide-content">
+                <h1 class="slide-title">AVANTAGES DES SOUS-ALGORITHMES</h1>
+                <div class="content-area">
+                    <div class="advantages-grid">
+                        <div class="advantage-card">
+                            <span class="advantage-icon">♾️</span>
+                            <h3>Réutilisabilité</h3>
+                            <p>Un même sous-algorithme peut être utilisé plusieurs fois dans différents contextes</p>
+                        </div>
+                        <div class="advantage-card">
+                            <span class="advantage-icon">🧩</span>
+                            <h3>Modularité</h3>
+                            <p>Décomposition du problème en modules indépendants et gérables</p>
+                        </div>
+                        <div class="advantage-card">
+                            <span class="advantage-icon">📖</span>
+                            <h3>Lisibilité</h3>
+                            <p>Code plus clair et mieux structuré, facile à comprendre et maintenir</p>
+                        </div>
+                        <div class="advantage-card">
+                            <span class="advantage-icon">🔧</span>
+                            <h3>Maintenabilité</h3>
+                            <p>Modifications localisées, tests et débogage simplifiés</p>
+                        </div>
+                    </div>
+                    <div class="practical-example">
+                        <h3>💼 Exemple pratique</h3>
+                        <div class="code-block">
+                            <pre><code>// Au lieu de répéter ce code plusieurs fois...
+SI (nombre < 0) OU (nombre > 100) ALORS
+    ÉCRIRE "Erreur : nombre invalide"
+    RETOURNER FAUX
+FINSI
+
+// Créez une fonction :
+FONCTION EstValide(nombre : réel) : booléen
+DÉBUT
+    SI (nombre < 0) OU (nombre > 100) ALORS
+        ÉCRIRE "Erreur : nombre invalide"
+        RETOURNER FAUX
+    SINON
+        RETOURNER VRAI
+    FINSI
+FIN
+
+// Et utilisez-la :
+SI EstValide(nombre) ALORS
+    // Traitement...
+FINSI</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 32: Arrays (Tableaux) -->
+        <div class="slide" data-slide="32">
+            <div class="slide-content">
+                <h1 class="slide-title">TABLEAUX (ARRAYS)</h1>
+                <div class="content-area">
+                    <div class="arrays-content">
+                        <div class="array-basics">
+                            <h3>Déclaration</h3>
+                            <div class="code-block">
+                                <pre><code>// Tableau 1D
+notes : TABLEAU[1..10] DE réel
+
+// Tableau 2D
+matrice : TABLEAU[1..5, 1..5] DE entier
+
+// Tableaux avec constantes
+CONSTANTE MAX_ELEVES = 30
+eleves : TABLEAU[1..MAX_ELEVES] DE chaîne</code></pre>
+                            </div>
+                        </div>
+                        <div class="array-operations">
+                            <h3>Accès et manipulation</h3>
+                            <div class="code-block">
+                                <pre><code>// Affecter des valeurs
+notes[1] ← 15.5
+notes[2] ← 12.0
+
+// Lire depuis le clavier
+POUR i DE 1 À 5 FAIRE
+    ÉCRIRE "Note ", i, " : "
+    LIRE notes[i]
+FIN POUR
+
+// Parcourir et afficher
+POUR i DE 1 À 5 FAIRE
+    ÉCRIRE "Note ", i, " : ", notes[i]
+FIN POUR</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 33: Contemporary Applications -->
+        <div class="slide" data-slide="33">
+            <div class="slide-content">
+                <h1 class="slide-title">APPLICATIONS CONTEMPORAINES</h1>
+                <div class="content-area">
+                    <div class="applications-grid">
+                        <div class="app-card">
+                            <span class="app-icon">🔍</span>
+                            <h3>Moteurs de recherche</h3>
+                            <p><strong>PageRank de Google</strong></p>
+                            <p>Classe les pages web selon leur pertinence et popularité</p>
+                        </div>
+                        <div class="app-card">
+                            <span class="app-icon">🎵</span>
+                            <h3>Streaming &amp; Recommandations</h3>
+                            <p><strong>Netflix, Spotify, YouTube</strong></p>
+                            <p>Algorithmes de recommandation basés sur vos préférences</p>
+                        </div>
+                        <div class="app-card">
+                            <span class="app-icon">🚗</span>
+                            <h3>Navigation GPS</h3>
+                            <p><strong>Algorithme de Dijkstra</strong></p>
+                            <p>Calcul du plus court chemin entre deux points</p>
+                        </div>
+                        <div class="app-card">
+                            <span class="app-icon">🔒</span>
+                            <h3>Cryptographie</h3>
+                            <p><strong>RSA, AES, Blockchain</strong></p>
+                            <p>Sécurisation des données et transactions</p>
+                        </div>
+                        <div class="app-card">
+                            <span class="app-icon">🤖</span>
+                            <h3>Intelligence Artificielle</h3>
+                            <p><strong>Machine Learning, Deep Learning</strong></p>
+                            <p>Reconnaissance vocale, vision par ordinateur, ChatGPT</p>
+                        </div>
+                        <div class="app-card">
+                            <span class="app-icon">💰</span>
+                            <h3>Finance</h3>
+                            <p><strong>Trading algorithmique</strong></p>
+                            <p>Analyse de marché, gestion de risques, transactions automatiques</p>
+                        </div>
+                    </div>
+                    <div class="impact-note">
+                        <p class="impact-text">🌍 <strong>Impact global :</strong> Ces algorithmes traitent des milliards de données chaque seconde et influencent notre quotidien !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 34: Key Points Summary -->
+        <div class="slide" data-slide="34">
+            <div class="slide-content">
+                <h1 class="slide-title">RÉCAPITULATIF : LES POINTS CLÉS</h1>
+                <div class="content-area">
+                    <div class="summary-points">
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Définition maîtrisée</h3>
+                                <p>Un algorithme est une suite d'instructions précises pour résoudre un problème</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Structures de base</h3>
+                                <p>Variables, conditions (SI), boucles (POUR, TANTQUE, RÉPÉTER)</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Méthodologie</h3>
+                                <p>Analyse → Décomposition → Conception → Test → Optimisation</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Qualités essentielles</h3>
+                                <p>Correction, Efficacité, Lisibilité, Modularité</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Représentation</h3>
+                                <p>Pseudo-code structuré et standardisé</p>
+                            </div>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-check">✓</span>
+                            <div class="summary-content">
+                                <h3>Applications réelles</h3>
+                                <p>Omniprésents dans notre quotidien numérique</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 35: Tips for Success -->
+        <div class="slide" data-slide="35">
+            <div class="slide-content">
+                <h1 class="slide-title">CONSEILS POUR RÉUSSIR</h1>
+                <div class="content-area">
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <span class="tip-number">1</span>
+                            <div class="tip-content">
+                                <h3>💪 Pratiquer régulièrement</h3>
+                                <p>Comme pour un sport, l'algorithmique se maîtrise par la pratique quotidienne</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">2</span>
+                            <div class="tip-content">
+                                <h3>🧩 Décomposer les problèmes</h3>
+                                <p>Divisez les problèmes complexes en sous-problèmes plus simples</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">3</span>
+                            <div class="tip-content">
+                                <h3>✏️ Dessiner avant de coder</h3>
+                                <p>Schématisez votre réflexion avec des organigrammes ou des diagrammes</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">4</span>
+                            <div class="tip-content">
+                                <h3>👀 Lire du code</h3>
+                                <p>Étudiez les algorithmes existants pour comprendre différentes approches</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">5</span>
+                            <div class="tip-content">
+                                <h3>🧔 Tester systématiquement</h3>
+                                <p>Vérifiez votre algorithme avec différents jeux de données</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">6</span>
+                            <div class="tip-content">
+                                <h3>🚀 Ne pas abandonner</h3>
+                                <p>La persévérance est clé : chaque erreur est une occasion d'apprendre</p>
+                            </div>
+                        </div>
+                        <div class="tip-item">
+                            <span class="tip-number">7</span>
+                            <div class="tip-content">
+                                <h3>🧠 Comprendre avant de mémoriser</h3>
+                                <p>Privilégiez la compréhension des concepts plutôt que l'apprentissage par cœur</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 36: Thank You -->
+        <div class="slide" data-slide="36">
+            <div class="slide-content final-slide">
+                <h1 class="slide-title">MERCI DE VOTRE ATTENTION !</h1>
+                <div class="content-area">
+                    <div class="final-content">
+                        <div class="questions-section">
+                            <h3>🤔 Questions ?</h3>
+                            <p>N'hésitez pas à poser vos questions !</p>
+                        </div>
+                        <div class="quote-section">
+                            <blockquote>
+                                "La programmation informatique est un art, car elle applique des connaissances accumulées au monde, car elle nécessite des compétences et de l'ingéniosité, et surtout parce qu'elle produit des objets de beauté."
+                                <footer>— Donald Knuth</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="navigation-controls">
+        <div class="nav-container">
+            <button class="nav-btn" id="prevBtn" title="Slide précédente">
+                <span class="nav-arrow">←</span>
+            </button>
+            
+            <div class="slide-counter">
+                <span id="currentSlide">1</span> / <span id="totalSlides">36</span>
+            </div>
+            
+            <button class="nav-btn" id="nextBtn" title="Slide suivante">
+                <span class="nav-arrow">→</span>
+            </button>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
