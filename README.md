@@ -1,4 +1,4 @@
-presentation-V.1.0.2
+presentation-V.1.0.2.
 Welcome to the presentation-V.1.0.2 project!
 
 This project was specially developed for a client by Yassine Abouayyoub. It provides a professional and fully customizable presentation that is easy to adapt and integrate according to the client's needs.
